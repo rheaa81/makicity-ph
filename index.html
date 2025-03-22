@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maki City - Japanese Cuisine</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="description" content="Maki City offers Japanese cuisine with global fusion flavors. Order online for delivery or pickup.">
+</head>
+
+<body class="font-sans bg-white">
+<!-- Navigation -->
+<nav class="fixed-header">
+  <div class="container mx-auto px-4 flex justify-between items-center py-4">
+      <a href="#" class="flex items-center cursor-pointer">
+          <img src="MAKI CITY LOGO.svg" alt="Maki City Logo" class="h-10 md:h-12 mr-2 md:mr-3">
+          <div class="text-xl md:text-2xl font-bold text-white">MAKI CITY</div>
+      </a>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+      </button>
+      
+      <!-- Desktop Search -->
+      <div class="hidden md:flex flex-1 max-w-md mx-auto px-4">
+          <div class="relative flex items-center w-full">
+              <input 
+                  type="text" 
+                  placeholder="Search menu..." 
+                  class="search-input px-4 py-2 rounded-lg text-sm w-full pr-10"
+                  aria-label="Search menu items"
+              >
+              <button class="absolute right-3 top-1/2 transform -translate-y-1/2" aria-label="Search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+              </button>
+          </div>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-6">
+          <a href="#" class="text-white nav-link">Home</a>
+          <a href="#menu" class="text-white nav-link">Menu</a>
+          <a href="#about-us" class="text-white nav-link">About Us</a>
+          <a href="#contact" class="text-white nav-link">Contact</a>
+          <div class="cart-icon-wrapper cursor-pointer" aria-label="Shopping cart" role="button" tabindex="0">
+              <div class="relative">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span id="cart-badge" class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-brown-800 pb-4">
+      <!-- Mobile Search -->
+      <div class="px-4 py-2">
+          <div class="relative flex items-center">
+              <input 
+                  type="text" 
+                  placeholder="Search menu..." 
+                  class="search-input px-4 py-2 rounded-lg text-sm w-full pr-10"
+                  aria-label="Search menu items"
+              >
+              <button class="absolute right-3 top-1/2 transform -translate-y-1/2" aria-label="Search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+              </button>
+          </div>
+      </div>
+      
+      <!-- Mobile Navigation Links -->
+      <div class="flex flex-col px-4 pt-2 pb-3 space-y-2">
+          <a href="#" class="text-white py-2 px-3 rounded hover:bg-brown-700 mobile-nav-link">Home</a>
+          <a href="#menu" class="text-white py-2 px-3 rounded hover:bg-brown-700 mobile-nav-link">Menu</a>
+          <a href="#about-us" class="text-white py-2 px-3 rounded hover:bg-brown-700 mobile-nav-link">About Us</a>
+          <a href="#contact" class="text-white py-2 px-3 rounded hover:bg-brown-700 mobile-nav-link">Contact</a>
+          <div class="flex items-center py-2 px-3 text-white mobile-cart-wrapper">
+              <span>Cart</span>
+              <div class="cart-icon-wrapper ml-2 cursor-pointer" aria-label="Shopping cart" role="button" tabindex="0">
+                  <div class="relative">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon">
+                          <circle cx="9" cy="21" r="1"></circle>
+                          <circle cx="20" cy="21" r="1"></circle>
+                          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                      </svg>
+                      <span id="mobile-cart-badge" class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+<div class="container mx-auto px-4 md:px-6">
+  <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center h-full">
+      <div class="space-y-1 flex flex-col justify-center"> 
+          <div>
+              <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold custom-heading">
+                 <span>EXPERIENCE THE</span>
+                 <span>WORLD'S FLAVORS,</span>
+                 <span>ONE MAKI ROLL</span>
+                 <span>AT A TIME</span>
+             </h1>
+              <p class="text-base md:text-lg mt-4 text-white">
+                  Maki City offers a world of flavor in every bite! We craft maki with diverse, high-quality ingredients, featuring exciting global fusions and options catering to the Filipino palate. There's something for everyone to enjoy!
+              </p>
+              <a href="#menu" class="inline-block bg-yellow-500 text-brown-900 px-5 py-2 rounded-lg hover:bg-yellow-600 transition focus:ring-2 focus:ring-yellow-400 focus:outline-none mt-6">
+                  <div class="flex items-center">
+                      <span class="font-medium">VIEW OUR MENU</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="#432414">
+                          <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <div class="flex justify-center items-center">
+          <img 
+              src="PHOTOGRAPHY.jpg" 
+              alt="Assorted sushi rolls" 
+              class="w-full h-auto object-cover rounded-lg shadow-lg"
+              loading="lazy"
+          />
+      </div>
+  </div>
+</div>
+</section>
+
+<div class="container mx-auto px-4 md:px-6">
+  <!-- Menu Section -->
+  <section id="menu" class="py-8 md:py-12 bg-white scroll-mt-20">
+  
+  <!-- Category tabs with horizontal scrolling on mobile -->
+<div class="category-tabs-container overflow-x-auto pb-0">
+  <div class="category-tabs inline-flex md:flex md:flex-wrap md:justify-center" role="tablist" aria-label="Menu categories">
+      <button class="category-tab active whitespace-nowrap" data-category="all" role="tab" aria-selected="true" tabindex="0">All</button>
+      <button class="category-tab whitespace-nowrap" data-category="Maki Cities" role="tab" aria-selected="false" tabindex="0">Maki Cities</button>
+      <button class="category-tab whitespace-nowrap" data-category="Nori Maki Mixed" role="tab" aria-selected="false" tabindex="0">Nori Maki Mixed</button>
+      <button class="category-tab whitespace-nowrap" data-category="Multiple Cities" role="tab" aria-selected="false" tabindex="0">Multiple Cities</button>
+      <button class="category-tab whitespace-nowrap" data-category="Salad" role="tab" aria-selected="false" tabindex="0">Salad</button>
+      <button class="category-tab whitespace-nowrap" data-category="Also Available" role="tab" aria-selected="false" tabindex="0">Also Available</button>
+  </div>
+</div>
+      
+      <div class="container mx-auto" id="menu-container">
+          <!-- Menu sections will be dynamically added here -->
+          <div class="loading-spinner flex justify-center py-8">
+              <div class="spinner"></div>
+          </div>
+      </div>
+  </section>
+</div>
+
+<!-- About Us Section -->
+<section id="about-us" class="py-16 md:py-24 lg:py-36 bg-brown-900 scroll-mt-4 relative">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');"></div>
+
+<div class="container mx-auto px-4 md:px-6 relative z-10">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-center text-white">ABOUT MAKI CITY</h2>
+    <div class="max-w-3xl mx-auto text-center">
+        <p class="text-base md:text-lg text-gray-200 leading-relaxed mb-4 md:mb-6">
+            Maki City was born from a couple's passionate love for Japanese cuisine. What started as a shared culinary adventure has blossomed into a unique dining experience that celebrates the diversity of global flavors.
+        </p>
+        <p class="text-base md:text-lg text-gray-200 leading-relaxed mb-4 md:mb-6">
+            Our menu is a culinary journey, inspired by different cities and states, each roll telling a story through its carefully selected ingredients. From Seoul's bold bulgogi ham to Tokyo's delicate teriyaki, every Maki City creation is a tribute to the rich tapestry of global food culture.
+        </p>
+        <p class="text-base md:text-lg text-gray-200 leading-relaxed">
+            We believe that sushi is more than just food—it's an art form, a cultural expression, and a way to connect people through extraordinary flavors. At Maki City, we invite you to explore the world, one roll at a time.
+        </p>
+    </div>
+</div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-12 md:py-16 bg-brown-100 scroll-mt-20 relative">
+<div class="container mx-auto px-4 md:px-6">
+<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 md:mb-12 text-center text-brown-900">WHAT OUR CUSTOMERS SAY</h2>
+
+<div class="testimonial-slider">
+  <!-- Testimonial 1 -->
+  <div class="testimonial-slide">
+    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg relative">
+      <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+        <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brown-900">
+            <path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+            <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="pt-8">
+        <p class="text-brown-900 italic mb-4">"The Maki City rolls are absolutely amazing! The Seoul roll with bulgogi ham and kimchi is my favorite. The flavors are so authentic and the service is always friendly."</p>
+        <div class="flex items-center">
+          <div class="flex-1">
+            <h4 class="font-bold text-brown-900">Maria Santos</h4>
+            <div class="flex text-yellow-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Testimonial 2 -->
+  <div class="testimonial-slide">
+    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg relative">
+      <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+        <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brown-900">
+            <path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+            <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="pt-8">
+        <p class="text-brown-900 italic mb-4">"I ordered the Multiple Cities package for a family gathering and everyone loved it! The variety of flavors was perfect and the quality was outstanding. Will definitely order again!"</p>
+        <div class="flex items-center">
+          <div class="flex-1">
+            <h4 class="font-bold text-brown-900">John Reyes</h4>
+            <div class="flex text-yellow-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Testimonial 3 -->
+  <div class="testimonial-slide">
+    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg relative">
+      <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+        <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brown-900">
+            <path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+            <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="pt-8">
+        <p class="text-brown-900 italic mb-4">"The delivery was prompt and the food was still fresh when it arrived. I especially loved the Chicken Teriyaki Salad - so flavorful and healthy! Maki City has become our go-to for Japanese food."</p>
+        <div class="flex items-center">
+          <div class="flex-1">
+            <h4 class="font-bold text-brown-900">Anna Cruz</h4>
+            <div class="flex text-yellow-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Customer Review Form -->
+<div class="max-w-2xl mx-auto mt-12 bg-white p-6 rounded-lg shadow-lg">
+  <h3 class="text-xl md:text-2xl font-bold mb-4 text-brown-900 text-center">Share Your Experience</h3>
+  <form id="review-form" class="grid md:grid-cols-2 gap-4" onsubmit="handleReviewSubmit(event)">
+    <div class="grid gap-2">
+      <label for="review-name" class="text-sm font-medium text-brown-900">Your Name</label>
+      <input type="text" id="review-name" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Juan Dela Cruz">
+    </div>
+    
+    <div class="grid gap-2">
+      <label for="review-email" class="text-sm font-medium text-brown-900">Email Address</label>
+      <input type="email" id="review-email" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="yourname@email.com">
+    </div>
+    
+    <div class="grid gap-2">
+      <label class="text-sm font-medium text-brown-900">Your Rating</label>
+      <div class="flex gap-2">
+        <div class="rating-stars flex">
+          <button type="button" class="star-btn text-gray-300 hover:text-yellow-500 focus:outline-none" data-rating="1" aria-label="Rate 1 star">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </button>
+          <button type="button" class="star-btn text-gray-300 hover:text-yellow-500 focus:outline-none" data-rating="2" aria-label="Rate 2 stars">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </button>
+          <button type="button" class="star-btn text-gray-300 hover:text-yellow-500 focus:outline-none" data-rating="3" aria-label="Rate 3 stars">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </button>
+          <button type="button" class="star-btn text-gray-300 hover:text-yellow-500 focus:outline-none" data-rating="4" aria-label="Rate 4 stars">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </button>
+          <button type="button" class="star-btn text-gray-300 hover:text-yellow-500 focus:outline-none" data-rating="5" aria-label="Rate 5 stars">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <input type="hidden" id="review-rating" name="rating" value="0" required>
+        <span id="rating-text" class="ml-2 text-sm text-gray-500">Select your rating</span>
+      </div>
+    </div>
+    
+    <div class="grid gap-2">
+      <label for="review-title" class="text-sm font-medium text-brown-900">Review Title</label>
+      <input type="text" id="review-title" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Summarize your experience">
+    </div>
+    
+    <div class="grid gap-2 md:col-span-2">
+      <label for="review-text" class="text-sm font-medium text-brown-900">Your Review</label>
+      <textarea id="review-text" required class="w-full p-2 border rounded-lg input-style h-24 focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Tell us about your experience with our food and service"></textarea>
+    </div>
+    
+    <div class="mt-2 md:col-span-2">
+      <button type="submit" class="w-full bg-yellow-500 text-brown-900 px-4 py-3 rounded-lg hover:bg-yellow-600 transition font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        Submit Review
+      </button>
+    </div>
+  </form>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-12 bg-white scroll-mt-16">
+  <div class="container mx-auto px-4 md:px-6">
+      
+      <div class="max-w-5xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-6 bg-white rounded-lg overflow-hidden shadow-xl">
+              <!-- Contact Form -->
+              <div class="p-4 md:p-6 bg-white">
+                  <div class="rounded-lg overflow-hidden">
+                      <!-- Google Maps embed with Las Piñas branch address -->
+                      <iframe 
+                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.5661035904824!2d120.97729867489535!3d14.44636487991095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d1e8c2e0b7c3%3A0x8c33b21e81c0d0ce!2sBF%20Resort%20Village%2C%20Las%20Pi%C3%B1as%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1710607800792!5m2!1sen!2sph" 
+                          width="100%" 
+                          height="300" 
+                          style="border:0;" 
+                          allowfullscreen="" 
+                          loading="lazy" 
+                          referrerpolicy="no-referrer-when-downgrade"
+                          title="Maki City Las Piñas Branch Location">
+                      </iframe>
+                  </div>
+                  <p class="text-center mt-4 text-brown-900 font-medium">
+                      Blk 20-3D JB Tan Sr. St. BF Resort Village Talon 2 Las Piñas City
+                  </p>
+              </div>
+              
+              <!-- Contact Information -->
+              <div class="p-4 md:p-6 bg-brown-100">
+                  <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-brown-900">Get in Touch</h3>
+                  
+                  <!-- Business Hours -->
+                  <div class="mb-6 md:mb-8">
+                      <h4 class="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-brown-900">Business Hours</h4>
+                      <div class="bg-white p-3 md:p-4 rounded-lg shadow-md">
+                          <div class="flex justify-between items-center mb-2">
+                              <span class="font-medium">Monday - Friday</span>
+                              <span>9:00 AM - 8:00 PM</span>
+                          </div>
+                          <div class="flex justify-between items-center mb-2">
+                              <span class="font-medium">Saturday</span>
+                              <span>10:00 AM - 9:00 PM</span>
+                          </div>
+                          <div class="flex justify-between items-center">
+                              <span class="font-medium">Sunday</span>
+                              <span>10:00 AM - 8:00 PM</span>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Quick Contact -->
+                  <div>
+                      <h4 class="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-brown-900">Need a Quick Response?</h4>
+                      <button 
+                          id="request-call-btn"
+                          class="w-full p-3 border-2 border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-500 hover:text-brown-900 transition focus:ring-2 focus:ring-yellow-400 focus:outline-none font-bold flex items-center justify-center"
+                      >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                          </svg>
+                          Request a Call Back
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer-gradient text-white py-6 md:py-9">
+  <div class="container mx-auto px-4 md:px-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <!-- Store Branches: Las Piñas -->
+          <div>
+              <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Las Piñas Branch</h4>
+              <ul class="space-y-2">
+                  <li>
+                      <strong>Location</strong>
+                      <p class="text-sm">Blk 20-3D JB Tan Sr. St. BF Resort Village Talon 2 Las Piñas City</p>
+                  </li>
+                  <li>
+                      <strong>Contact</strong>
+                      <p class="text-sm"><a href="tel:09952053260" class="hover:text-yellow-300 transition">0995 205 326</a></p>
+                  </li>
+              </ul>
+          </div>
+
+          <!-- Store Branches: Cavite -->
+          <div>
+              <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Cavite Branch</h4>
+              <ul class="space-y-2">
+                  <li>
+                      <strong>Location</strong>
+                      <p class="text-sm">Sintos Bldg Unit E 308 Magdiwang HWY, Noveleta, Cavite</p>
+                  </li>
+                  <li>
+                      <strong>Contact</strong>
+                      <p class="text-sm"><a href="tel:09457667440" class="hover:text-yellow-300 transition">0945 766 744</a></p>
+                  </li>
+              </ul>
+          </div>
+
+          <!-- Store Branches: Laguna -->
+          <div>
+              <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Laguna Branch</h4>
+              <ul class="space-y-2">
+                  <li>
+                      <strong>Location</strong>
+                      <p class="text-sm">#85 Brgy. Banlic, Cabuyao, Laguna</p>
+                  </li>
+                  <li>
+                      <strong>Contact</strong>
+                      <p class="text-sm"><a href="tel:09686799019" class="hover:text-yellow-300 transition">0968 6799 019</a></p>
+                  </li>
+              </ul>
+          </div>
+
+          <!-- Newsletter Signup -->
+          <div>
+              <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Stay Updated</h4>
+              <p class="text-sm mb-3 md:mb-4">Subscribe to our newsletter for latest updates and offers</p>
+              <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="flex">
+                  <input 
+                      type="email" 
+                      placeholder="Enter your email" 
+                      required
+                      class="w-full p-2 rounded-l-lg footer-subscription-input focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                  >
+                  <button type="submit" class="bg-yellow-500 text-brown-900 px-3 md:px-4 rounded-r-lg hover:bg-yellow-600 transition focus:ring-2 focus:ring-yellow-400 focus:outline-none">
+                      Subscribe
+                  </button>
+              </form>
+              
+              <!-- Social Media Icons -->
+              <div class="flex space-x-4 mt-4 justify-center">
+                  <!-- Facebook Icon -->
+                  <a href="https://www.facebook.com/makicityph" class="hover:text-yellow-300 transition" aria-label="Facebook">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                  </a>
+                  
+                  <!-- Instagram Icon -->
+                  <a href="https://www.instagram.com/makicityph?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="hover:text-yellow-300 transition" aria-label="Instagram">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                  </a>
+                  
+                  <!-- Food Panda Icon -->
+                  <a href="https://www.foodpanda.ph/restaurant/s6qr/maki-city-bf-resort?utm_source=google&utm_medium=organic&utm_campaign=google_reserve_place_order_action" class="hover:text-yellow-300 transition" aria-label="Order on Food Panda">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M17 11.6V9a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v8a2 2 0 0 0 2 2h12"></path>
+                          <path d="M22 13h-9a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1Z"></path>
+                          <path d="M13.3 17h7.4"></path>
+                      </svg>
+                  </a>
+              </div>
+          </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="mt-6 md:mt-8 pt-4 border-t border-brown-700 text-center">
+          <p class="text-sm">&copy; 2025 Maki City. All Rights Reserved.</p>
+      </div>
+  </div>
+</footer>
+
+<!-- Cart Sidebar -->
+<div id="cart-overlay" class="hidden"></div>
+<div id="cart-sidebar" class="cart-sidebar hidden">
+  <div class="p-4 border-b flex justify-between items-center">
+      <h3 class="text-xl font-bold text-brown-900">Your Order</h3>
+      <button id="close-cart" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded-full p-1" aria-label="Close cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+      </button>
+  </div>
+  <div id="cart-items" class="overflow-y-auto max-h-[calc(100vh-200px)]">
+      <!-- Cart items will be dynamically added here -->
+      <p class="text-center py-4">Your cart is empty</p>
+  </div>
+  <div class="p-4 border-t bg-gray-50">
+      <div class="flex justify-between items-center mb-4">
+          <span class="font-semibold text-brown-900">Subtotal:</span>
+          <span id="cart-total" class="font-bold text-xl text-brown-900">₱0.00</span>
+      </div>
+      <div class="flex space-x-2 mb-4">
+          <button id="clear-cart" class="flex-1 text-center py-2 border border-gray-300 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-yellow-400">
+              Clear Cart
+          </button>
+          <button id="save-cart" class="flex-1 text-center py-2 border border-gray-300 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-yellow-400">
+              Save for Later
+          </button>
+      </div>
+      <button id="checkout-btn" class="w-full bg-yellow-500 text-brown-900 py-3 rounded-lg hover:bg-yellow-600 transition font-semibold focus:outline-none focus:ring-2 focus:ring-yellow-400">
+          Proceed to Checkout
+      </button>
+      <button id="continue-shopping" class="w-full mt-2 text-center py-2 text-brown-900 hover:underline">
+          Continue Shopping
+      </button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="checkout-modal" class="modal hidden">
+  <div class="modal-content p-4 md:p-6 max-w-md mx-auto">
+      <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-brown-900">Checkout</h3>
+          <button id="close-checkout" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded-full p-1" aria-label="Close checkout">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+          </button>
+      </div>
+      <form id="checkout-form" class="grid gap-4">
+          <div class="grid gap-2">
+              <label for="checkout-name" class="text-sm font-medium text-brown-900">Full Name</label>
+              <input type="text" id="checkout-name" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Juan Dela cruz">
+              <div class="error-message hidden text-red-500 text-sm"></div>
+          </div>
+          <div class="grid gap-2">
+              <label for="checkout-phone" class="text-sm font-medium text-brown-900">Phone Number</label>
+              <input type="tel" id="checkout-phone" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="09XX XXX XXXX">
+              <div class="error-message hidden text-red-500 text-sm"></div>
+          </div>
+          <div class="grid gap-2">
+              <label for="checkout-email" class="text-sm font-medium text-brown-900">Email</label>
+              <input type="email" id="checkout-email" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="yourname@email.com">
+              <div class="error-message hidden text-red-500 text-sm"></div>
+          </div>
+          <div class="grid gap-2">
+              <label for="checkout-address" class="text-sm font-medium text-brown-900">Delivery Address</label>
+              <textarea id="checkout-address" required class="w-full p-2 border rounded-lg input-style h-20 focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Enter your complete delivery address"></textarea>
+              <div class="error-message hidden text-red-500 text-sm"></div>
+          </div>
+          <div class="grid gap-2">
+              <label class="text-sm font-medium text-brown-900">Payment Method</label>
+              <div class="grid gap-2">
+                  <label class="flex items-center space-x-2">
+                      <input type="radio" name="payment" value="cash" checked class="text-yellow-500 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2">
+                      <span>Cash on Delivery</span>
+                  </label>
+                  <label class="flex items-center space-x-2">
+                      <input type="radio" name="payment" value="gcash" class="text-yellow-500 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2">
+                      <span>GCash</span>
+                  </label>
+                  <label class="flex items-center space-x-2">
+                      <input type="radio" name="payment" value="bank" class="text-yellow-500 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2">
+                      <span>Bank Transfer</span>
+                  </label>
+              </div>
+          </div>
+          <div class="grid gap-2 mt-2">
+              <label for="checkout-instructions" class="text-sm font-medium text-brown-900">Special Instructions (Optional)</label>
+              <textarea id="checkout-instructions" class="w-full p-2 border rounded-lg input-style h-20 focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Any special requests or delivery instructions"></textarea>
+          </div>
+          <div class="mt-4">
+              <button id="process-order" type="submit" class="w-full bg-yellow-500 text-brown-900 px-4 py-3 rounded-lg hover:bg-yellow-600 transition font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                  <span class="button-text">Place Order</span>
+                  <span class="button-loader hidden">
+                      <svg class="animate-spin h-5 w-5 text-brown-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                  </span>
+              </button>
+          </div>
+      </form>
+  </div>
+</div>
+
+<!-- Request Call Modal -->
+<div id="request-call-modal" class="modal hidden">
+  <div class="modal-content p-4 md:p-6 max-w-md mx-auto">
+      <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-brown-900">Request a Call</h3>
+          <button id="close-request-call" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded-full p-1" aria-label="Close request call form">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+          </button>
+      </div>
+      <form id="request-call-form" class="grid gap-4">
+          <div class="grid gap-2">
+              <label for="call-name" class="text-sm font-medium text-brown-900">Your Name</label>
+              <input type="text" id="call-name" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="Juan Dela Cruz">
+          </div>
+          <div class="grid gap-2">
+              <label for="call-phone" class="text-sm font-medium text-brown-900">Phone Number</label>
+              <input type="tel" id="call-phone" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none" placeholder="09XX XXX XXXX">
+          </div>
+          <div class="grid gap-2">
+              <label for="call-time" class="text-sm font-medium text-brown-900">Preferred Time to Call</label>
+              <select id="call-time" required class="w-full p-2 border rounded-lg input-style focus:ring-2 focus:ring-yellow-400 focus:outline-none">
+                  <option value="">Select a time</option>
+                  <option value="morning">Morning (9AM - 12PM)</option>
+                  <option value="afternoon">Afternoon (1PM - 5PM)</option>
+                  <option value="evening">Evening (6PM - 8PM)</option>
+              </select>
+          </div>
+          <div class="mt-4">
+              <button type="submit" class="w-full bg-yellow-500 text-brown-900 px-4 py-3 rounded-lg hover:bg-yellow-600 transition font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                  Submit Request
+              </button>
+          </div>
+      </form>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast-notification" class="toast-notification">
+  Item added to cart
+</div>
+
+<!-- Success Message -->
+<div id="success-message" class="success-message">
+  Operation completed successfully
+</div>
+
+<!-- Promotional Popup -->
+<div id="promo-popup" class="promo-popup">
+  <div class="promo-popup-content">
+      <button id="close-promo" class="close-promo" aria-label="Close promotion">×</button>
+      <div class="promo-image">
+          <img src="WITHOUT.png" alt="Promotional Advertisement" class="rounded-t-lg">
+      </div>
+  </div>
+</div>
+
+<script data-cfasync="false" img src="BANNERR.png"></script></body>
+</html>
+
